@@ -1,0 +1,16 @@
+CRYPTOATIAN ROLES
+
+- hacker 2.0
+- ambassador 2.0
+- bureaucrat 1.2
+- bankster 1.2
+- worker 1.5
+- politician 1.2
+- soldier 1.5
+- expert 2.0
+- teacher 1.5
+- citizen 1.0
+- oracle 3.0
+- hero 5.0
+- keeper 10.0
+- angel 3.0
