@@ -9,3 +9,9 @@ func homeView(ctx *macaron.Context) {
 
 	ctx.HTML(200, "home")
 }
+
+func contactView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Contact | "
+
+	ctx.HTML(200, "contact")
+}

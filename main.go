@@ -18,6 +18,7 @@ func main() {
 	m = initMacaron()
 
 	m.Get("/", newPageData, homeView)
+	m.Get("/contact/", newPageData, contactView)
 
 	// m.NotFound(view404)
 
