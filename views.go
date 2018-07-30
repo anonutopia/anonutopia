@@ -16,6 +16,12 @@ func profitView(ctx *macaron.Context) {
 	ctx.HTML(200, "profit")
 }
 
+func projectsView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Anonutopia Projects | "
+
+	ctx.HTML(200, "projects")
+}
+
 func contactView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Contact | "
 

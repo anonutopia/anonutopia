@@ -19,6 +19,7 @@ func main() {
 
 	m.Get("/", newPageData, homeView)
 	m.Get("/profit/", newPageData, profitView)
+	m.Get("/projects/", newPageData, projectsView)
 	m.Get("/contact/", newPageData, contactView)
 
 	// m.NotFound(view404)
