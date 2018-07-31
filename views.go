@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/anonutopia/gowaves"
+	"github.com/go-macaron/i18n"
 	"gopkg.in/macaron.v1"
 	"gopkg.in/telegram-bot-api.v4"
 )
@@ -43,10 +44,23 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 	msgArr := strings.Fields(tu.Message.Text)
 	var msg tgbotapi.Chattable
 	send := true
+	var lang string
+
+	if tu.Message.Chat.ID == -304575934 {
+		lang = "hr"
+	} else {
+		lang = "en-US"
+	}
+
+	m.Use(i18n.I18n(i18n.Options{
+		Langs:       []string{"hr", "sr", "en-US"},
+		Names:       []string{"Hrvatski", "Srpski", "English"},
+		DefaultLang: lang,
+	}))
 
 	if len(msgArr) == 1 {
 		if msgArr[0] == "/gimme@AnonsRobot" {
-			msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Adresa novčanika je obavezna. Pokušaj ponovo tako da upišeš i nju (/gimme@AnonsRobot adresa).")
+			msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("addressRequired"))
 		} else {
 			send = false
 		}
@@ -60,7 +74,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 					db.First(user, user)
 
 					if user.ReceivedFreeAnote {
-						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Tvoja besplatna Anota već je aktivirana. Morat ćeš unaprijediti svoje hakerske vještine. 😆")
+						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("alreadyActivated"))
 					} else {
 						atr := &gowaves.AssetsTransferRequest{
 							Amount:    100000000,
@@ -72,11 +86,11 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 
 						_, err := wnc.AssetsTransfer(atr)
 						if err != nil {
-							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf("Dogodio se problem: %s", err))
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ctx.Tr("error"), err))
 						} else {
 							user.ReceivedFreeAnote = true
 							db.Save(user)
-							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Poslao sam ti tvoju 1 besplatnu Anotu! Anonutopia ti želi dobrodošlicu! 🚀")
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("anoteSent"))
 
 							if len(user.Referral) > 0 {
 								atr := &gowaves.AssetsTransferRequest{
@@ -92,10 +106,10 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 						}
 					}
 				} else {
-					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Nešto nije u redu s adresom tvog novčanika. Molim te da ju provjeriš.")
+					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("addressNotValid"))
 				}
 			} else {
-				msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf("Dogodio se problem: %s", err))
+				msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ctx.Tr("error"), err))
 			}
 		} else {
 			send = false
