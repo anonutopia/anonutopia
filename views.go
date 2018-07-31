@@ -5,8 +5,8 @@ import (
 	"log"
 	"strings"
 
+	ui18n "github.com/Unknwon/i18n"
 	"github.com/anonutopia/gowaves"
-	"github.com/go-macaron/i18n"
 	"gopkg.in/macaron.v1"
 	"gopkg.in/telegram-bot-api.v4"
 )
@@ -47,7 +47,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 	send := true
 	var lang string
 
-	if tu.Message.Chat.ID == -304575934 || tu.Message.Chat.ID == -1001161265502 || tu.Message.Chat.ID == -1001397587839 {
+	if tu.Message.Chat.ID == -1001325718529 || tu.Message.Chat.ID == -1001161265502 || tu.Message.Chat.ID == -1001397587839 {
 		lang = "hr"
 	} else if tu.Message.Chat.ID == -1001249635625 {
 		lang = "sr"
@@ -57,14 +57,9 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 
 	log.Println(tu.Message.Chat.ID)
 
-	m.Use(i18n.I18n(i18n.Options{
-		Langs: []string{lang},
-		Names: []string{lang},
-	}))
-
 	if len(msgArr) == 1 {
 		if msgArr[0] == "/gimme@AnonsRobot" {
-			msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("addressRequired"))
+			msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "addressRequired"))
 		} else {
 			send = false
 		}
@@ -78,7 +73,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 					db.FirstOrCreate(user, user)
 
 					if user.ReceivedFreeAnote {
-						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("alreadyActivated"))
+						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "alreadyActivated"))
 					} else {
 						atr := &gowaves.AssetsTransferRequest{
 							Amount:    100000000,
@@ -90,11 +85,11 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 
 						_, err := wnc.AssetsTransfer(atr)
 						if err != nil {
-							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ctx.Tr("error"), err))
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ui18n.Tr(lang, "error"), err))
 						} else {
 							user.ReceivedFreeAnote = true
 							db.Save(user)
-							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("anoteSent"))
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "anoteSent"))
 
 							if len(user.Referral) > 0 {
 								atr := &gowaves.AssetsTransferRequest{
@@ -110,10 +105,10 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 						}
 					}
 				} else {
-					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("addressNotValid"))
+					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "addressNotValid"))
 				}
 			} else {
-				msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ctx.Tr("error"), err))
+				msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ui18n.Tr(lang, "error"), err))
 			}
 		} else {
 			send = false

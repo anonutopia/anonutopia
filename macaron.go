@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-macaron/cache"
 	"github.com/go-macaron/captcha"
+	"github.com/go-macaron/i18n"
 	"github.com/go-macaron/session"
 	"gopkg.in/macaron.v1"
 
@@ -18,6 +19,11 @@ const (
 
 func initMacaron() *macaron.Macaron {
 	m := macaron.Classic()
+
+	m.Use(i18n.I18n(i18n.Options{
+		Langs: []string{"hr", "sr", "en-US"},
+		Names: []string{"Hrvatski", "Srpski", "English"},
+	}))
 
 	ro := macaron.RenderOptions{
 		Layout: "layout",
