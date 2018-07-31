@@ -46,7 +46,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 
 	if len(msgArr) == 1 {
 		if msgArr[0] == "/gimme@AnonsRobot" {
-			msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Niste upisali adresu svog novčanika. Pokušajte ponovo tako da upišete i nju (/gimme@AnonsRobot adresa).")
+			msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Adresa novčanika je obavezna. Pokušaj ponovo tako da upišeš i nju (/gimme@AnonsRobot adresa).")
 		} else {
 			send = false
 		}
@@ -60,7 +60,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 					db.First(user, user)
 
 					if user.ReceivedFreeAnote {
-						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Već ste dobili svoju 1 besplatnu Anotu. Morat ćete unaprijediti svoje hakerske vještine. 😆")
+						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Tvoja besplatna Anota već je aktivirana. Morat ćeš unaprijediti svoje hakerske vještine. 😆")
 					} else {
 						atr := &gowaves.AssetsTransferRequest{
 							Amount:    100000000,
@@ -76,7 +76,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 						} else {
 							user.ReceivedFreeAnote = true
 							db.Save(user)
-							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Poslao sam vam vašu 1 besplatnu Anotu! Dobrodošli u Anonutopiju! 🚀")
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Poslao sam ti tvoju 1 besplatnu Anotu! Anonutopia ti želi dobrodošlicu! 🚀")
 
 							if len(user.Referral) > 0 {
 								atr := &gowaves.AssetsTransferRequest{
@@ -92,7 +92,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 						}
 					}
 				} else {
-					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Nešto nije u redu s adresom vašeg novčanika. Molim vas da ju provjerite.")
+					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Nešto nije u redu s adresom tvog novčanika. Molim te da ju provjeriš.")
 				}
 			} else {
 				msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf("Dogodio se problem: %s", err))
