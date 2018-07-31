@@ -57,7 +57,7 @@
 <body>
 
     <!-- Header -->
-    <header{{ if or (eq $.URI "/") (eq $.URI "/sudjeluj/") }} id="home"{{ end }}>
+    <header{{ if (eq $.URI "/") }} id="home"{{ end }}>
         <!-- Background Image -->
         <div class="bg-img" style="background-image: url('/img/background12.jpeg');">
             <div class="overlay"></div>
