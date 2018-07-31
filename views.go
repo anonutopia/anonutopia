@@ -75,7 +75,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 			if err == nil {
 				if avr.Valid {
 					user := &User{Address: addr}
-					db.First(user, user)
+					db.FirstOrCreate(user, user)
 
 					if user.ReceivedFreeAnote {
 						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ctx.Tr("alreadyActivated"))
