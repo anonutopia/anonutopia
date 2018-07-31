@@ -11,6 +11,8 @@ type Config struct {
 	Port            uint   `json:"port"`
 	Telegram        string `json:"telegram"`
 	WavesNodeApiKey string `json:"wavesnode_apikey"`
+	Debug           bool   `json:"debug"`
+	NodeAddress     string `json:"node_address"`
 }
 
 func (sc *Config) Load(configFile string) error {

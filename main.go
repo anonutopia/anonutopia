@@ -7,6 +7,7 @@ import (
 
 	"github.com/anonutopia/gowaves"
 	"github.com/go-macaron/binding"
+	"github.com/jinzhu/gorm"
 	"gopkg.in/macaron.v1"
 	"gopkg.in/telegram-bot-api.v4"
 )
@@ -19,6 +20,8 @@ var bot *tgbotapi.BotAPI
 
 var wnc *gowaves.WavesNodeClient
 
+var db *gorm.DB
+
 func main() {
 	conf = initConfig()
 
@@ -27,6 +30,8 @@ func main() {
 	bot = initBot()
 
 	wnc = initWaves()
+
+	db = initDb()
 
 	m.Get("/", newPageData, homeView)
 	m.Get("/profit/", newPageData, profitView)

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/anonutopia/gowaves"
 	"gopkg.in/macaron.v1"
 	"gopkg.in/telegram-bot-api.v4"
 )
@@ -39,7 +40,7 @@ func contactView(ctx *macaron.Context) {
 }
 
 func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
-	msgArr := strings.Split(tu.Message.Text, " ")
+	msgArr := strings.Fields(tu.Message.Text)
 	var msg tgbotapi.Chattable
 	send := true
 
@@ -55,7 +56,41 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 			avr, err := wnc.AddressValidate(addr)
 			if err == nil {
 				if avr.Valid {
-					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Poslao sam vam vašu 1 besplatnu Anotu! Dobrodošli u Anonutopiju! 🚀")
+					user := &User{Address: addr}
+					db.First(user, user)
+
+					if user.ReceivedFreeAnote {
+						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Već ste dobili svoju 1 besplatnu Anotu. Morat ćete unaprijediti svoje hakerske vještine. 😆")
+					} else {
+						atr := &gowaves.AssetsTransferRequest{
+							Amount:    100000000,
+							AssetID:   "4zbprK67hsa732oSGLB6HzE8Yfdj3BcTcehCeTA1G5Lf",
+							Fee:       100000,
+							Recipient: addr,
+							Sender:    conf.NodeAddress,
+						}
+
+						_, err := wnc.AssetsTransfer(atr)
+						if err != nil {
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf("Dogodio se problem: %s", err))
+						} else {
+							user.ReceivedFreeAnote = true
+							db.Save(user)
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Poslao sam vam vašu 1 besplatnu Anotu! Dobrodošli u Anonutopiju! 🚀")
+
+							if len(user.Referral) > 0 {
+								atr := &gowaves.AssetsTransferRequest{
+									Amount:    20000000,
+									AssetID:   "4zbprK67hsa732oSGLB6HzE8Yfdj3BcTcehCeTA1G5Lf",
+									Fee:       100000,
+									Recipient: user.Referral,
+									Sender:    conf.NodeAddress,
+								}
+
+								wnc.AssetsTransfer(atr)
+							}
+						}
+					}
 				} else {
 					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), "Nešto nije u redu s adresom vašeg novčanika. Molim vas da ju provjerite.")
 				}
