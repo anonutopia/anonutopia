@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/anonutopia/gowaves"
@@ -46,16 +47,19 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 	send := true
 	var lang string
 
-	if tu.Message.Chat.ID == -304575934 {
+	if tu.Message.Chat.ID == -304575934 || tu.Message.Chat.ID == -1001161265502 || tu.Message.Chat.ID == -1001397587839 {
 		lang = "hr"
+	} else if tu.Message.Chat.ID == -1001249635625 {
+		lang = "sr"
 	} else {
 		lang = "en-US"
 	}
 
+	log.Println(tu.Message.Chat.ID)
+
 	m.Use(i18n.I18n(i18n.Options{
-		Langs:       []string{"hr", "sr", "en-US"},
-		Names:       []string{"Hrvatski", "Srpski", "English"},
-		DefaultLang: lang,
+		Langs: []string{lang},
+		Names: []string{lang},
 	}))
 
 	if len(msgArr) == 1 {
@@ -64,7 +68,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 		} else {
 			send = false
 		}
-	} else {
+	} else if len(msgArr) > 1 {
 		if msgArr[0] == "/gimme@AnonsRobot" {
 			addr := msgArr[1]
 			avr, err := wnc.AddressValidate(addr)
@@ -114,6 +118,8 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 		} else {
 			send = false
 		}
+	} else {
+		send = false
 	}
 
 	if send {
