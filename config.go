@@ -13,6 +13,9 @@ type Config struct {
 	WavesNodeApiKey string `json:"wavesnode_apikey"`
 	Debug           bool   `json:"debug"`
 	NodeAddress     string `json:"node_address"`
+	DbName          string `json:"db_name"`
+	DbUser          string `json:"db_user"`
+	DbPass          string `json:"db_pass"`
 }
 
 func (sc *Config) Load(configFile string) error {
