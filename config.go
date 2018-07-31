@@ -7,8 +7,10 @@ import (
 )
 
 type Config struct {
-	Redis string `json:"redis"`
-	Port  uint   `json:"port"`
+	Redis           string `json:"redis"`
+	Port            uint   `json:"port"`
+	Telegram        string `json:"telegram"`
+	WavesNodeApiKey string `json:"wavesnode_apikey"`
 }
 
 func (sc *Config) Load(configFile string) error {
