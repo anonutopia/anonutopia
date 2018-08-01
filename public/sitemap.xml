@@ -9,22 +9,32 @@
 
 <url>
   <loc>https://www.anonutopia.com/</loc>
-  <lastmod>2018-07-30T00:25:29+00:00</lastmod>
+  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://www.anonutopia.com/airdrop/</loc>
+  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://www.anonutopia.com/profit/</loc>
-  <lastmod>2018-07-30T00:25:29+00:00</lastmod>
+  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.anonutopia.com/anote/</loc>
+  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.anonutopia.com/projects/</loc>
-  <lastmod>2018-07-30T00:25:29+00:00</lastmod>
+  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.anonutopia.com/contact/</loc>
-  <lastmod>2018-07-30T00:25:29+00:00</lastmod>
+  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
