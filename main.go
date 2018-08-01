@@ -34,6 +34,7 @@ func main() {
 	db = initDb()
 
 	m.Get("/", newPageData, homeView)
+	m.Get("/airdrop/", newPageData, airdropView)
 	m.Get("/profit/", newPageData, profitView)
 	m.Get("/anote/", newPageData, anoteView)
 	m.Get("/projects/", newPageData, projectsView)
