@@ -75,40 +75,44 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 			avr, err := wnc.AddressValidate(addr)
 			if err == nil {
 				if avr.Valid {
-					user := &User{Address: addr}
+					user := &User{Address: addr, TelegramId: tu.Message.From.ID}
 					db.FirstOrCreate(user, user)
 
-					if user.ReceivedFreeAnote {
-						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "alreadyActivated"))
-					} else {
-						atr := &gowaves.AssetsTransferRequest{
-							Amount:    100000000,
-							AssetID:   "4zbprK67hsa732oSGLB6HzE8Yfdj3BcTcehCeTA1G5Lf",
-							Fee:       100000,
-							Recipient: addr,
-							Sender:    conf.NodeAddress,
-						}
-
-						_, err := wnc.AssetsTransfer(atr)
-						if err != nil {
-							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ui18n.Tr(lang, "error"), err))
+					if user.ID != 0 {
+						if user.ReceivedFreeAnote {
+							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "alreadyActivated"))
 						} else {
-							user.ReceivedFreeAnote = true
-							db.Save(user)
-							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "anoteSent"))
+							atr := &gowaves.AssetsTransferRequest{
+								Amount:    100000000,
+								AssetID:   "4zbprK67hsa732oSGLB6HzE8Yfdj3BcTcehCeTA1G5Lf",
+								Fee:       100000,
+								Recipient: addr,
+								Sender:    conf.NodeAddress,
+							}
 
-							if len(user.Referral) > 0 {
-								atr := &gowaves.AssetsTransferRequest{
-									Amount:    20000000,
-									AssetID:   "4zbprK67hsa732oSGLB6HzE8Yfdj3BcTcehCeTA1G5Lf",
-									Fee:       100000,
-									Recipient: user.Referral,
-									Sender:    conf.NodeAddress,
+							_, err := wnc.AssetsTransfer(atr)
+							if err != nil {
+								msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), fmt.Sprintf(ui18n.Tr(lang, "error"), err))
+							} else {
+								user.ReceivedFreeAnote = true
+								db.Save(user)
+								msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "anoteSent"))
+
+								if len(user.Referral) > 0 {
+									atr := &gowaves.AssetsTransferRequest{
+										Amount:    20000000,
+										AssetID:   "4zbprK67hsa732oSGLB6HzE8Yfdj3BcTcehCeTA1G5Lf",
+										Fee:       100000,
+										Recipient: user.Referral,
+										Sender:    conf.NodeAddress,
+									}
+
+									wnc.AssetsTransfer(atr)
 								}
-
-								wnc.AssetsTransfer(atr)
 							}
 						}
+					} else {
+						msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "hacker"))
 					}
 				} else {
 					msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "addressNotValid"))
