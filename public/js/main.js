@@ -133,6 +133,23 @@ var ttlSupply = -1;
     //     $('#growth').html($('#growth').html().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     // }
 
+	var oracles = {
+		"HR": true,
+		"RS": true,
+	};
+
+	var map = new Datamap({
+        element: document.getElementById('container'),
+		fills: {
+			ORACLE: '#c40b0b',
+            defaultFill: '#adadad' // Any hex, color name or rgb/rgba value
+        },
+		data: {
+            HRV: { fillKey: 'ORACLE' },
+            SRB: { fillKey: 'ORACLE' }
+        }
+    });
+
 })(jQuery);
 
 // window.addEventListener('load', initMetaMask);

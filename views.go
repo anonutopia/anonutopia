@@ -23,6 +23,24 @@ func crowdfundingView(ctx *macaron.Context) {
 	ctx.HTML(200, "crowdfunding")
 }
 
+func aboutView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "About Anonutopia | "
+
+	ctx.HTML(200, "about")
+}
+
+func cryptocountriesView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Crypto Countries | "
+
+	ctx.HTML(200, "cryptocountries")
+}
+
+func tagsView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Anonutopia Tags | "
+
+	ctx.HTML(200, "tags")
+}
+
 func airdropView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Claim 1 Free ANOTE | "
 
