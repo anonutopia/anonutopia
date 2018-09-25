@@ -17,6 +17,12 @@ func homeView(ctx *macaron.Context) {
 	ctx.HTML(200, "home")
 }
 
+func crowdfundingView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Anonutopia Crowdfunding | "
+
+	ctx.HTML(200, "crowdfunding")
+}
+
 func airdropView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Claim 1 Free ANOTE | "
 
