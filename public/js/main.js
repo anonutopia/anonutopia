@@ -147,7 +147,8 @@ var ttlSupply = -1;
 		data: {
             HRV: { fillKey: 'ORACLE' },
             SRB: { fillKey: 'ORACLE' }
-        }
+        },
+		responsive: true
     });
 
 })(jQuery);
