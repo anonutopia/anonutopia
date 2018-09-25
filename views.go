@@ -224,3 +224,11 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 		bot.Send(msg)
 	}
 }
+
+func view404(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Error 404 | "
+
+	newPageData(ctx)
+
+	ctx.HTML(200, "404")
+}

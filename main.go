@@ -46,7 +46,7 @@ func main() {
 
 	m.Post("/webhook/", newPageData, binding.Json(TelegramUpdate{}), webhookView)
 
-	// m.NotFound(view404)
+	m.NotFound(view404)
 
 	// m.Run()
 	log.Println("Server is running...")
