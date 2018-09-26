@@ -29,6 +29,12 @@ func aboutView(ctx *macaron.Context) {
 	ctx.HTML(200, "about")
 }
 
+func applyView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Apply for Citizenship | "
+
+	ctx.HTML(200, "apply")
+}
+
 func cryptocountriesView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Crypto Countries | "
 
