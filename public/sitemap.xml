@@ -9,32 +9,57 @@
 
 <url>
   <loc>https://www.anonutopia.com/</loc>
-  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://www.anonutopia.com/airdrop/</loc>
-  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.anonutopia.com/profit/</loc>
-  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
+  <loc>https://www.anonutopia.com/crowdfunding/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.anonutopia.com/anote/</loc>
-  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.anonutopia.com/projects/</loc>
-  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
+  <loc>https://www.anonutopia.com/cryptocountries/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.anonutopia.com/about/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.anonutopia.com/tags/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.anonutopia.com/contact/</loc>
-  <lastmod>2018-08-01T01:08:17+00:00</lastmod>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.anonutopia.com/apply/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.anonutopia.com/projects/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.anonutopia.com/profit/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.anonutopia.com/airdrop/</loc>
+  <lastmod>2018-09-26T00:44:03+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
