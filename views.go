@@ -47,6 +47,18 @@ func tagsView(ctx *macaron.Context) {
 	ctx.HTML(200, "tags")
 }
 
+func docsView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Anonutopia Docs | "
+
+	ctx.HTML(200, "docs")
+}
+
+func stakingView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Staking Waves with Our Waves Node | "
+
+	ctx.HTML(200, "staking")
+}
+
 func airdropView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Claim 1 Free ANOTE | "
 
