@@ -54,7 +54,7 @@ func docsView(ctx *macaron.Context) {
 }
 
 func stakingView(ctx *macaron.Context) {
-	ctx.Data["Title"] = "Staking Waves with Our Waves Node | "
+	ctx.Data["Title"] = "Staking (Leasing) Waves with Our Waves Node | "
 
 	ctx.HTML(200, "staking")
 }
