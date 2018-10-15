@@ -121,7 +121,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 					db.First(user, user)
 
 					if user.ID == 0 {
-						if addr != "3PDb1ULFjazuzPeWkF2vqd1nomKh4ctq9y2" {
+						if addr != conf.NodeAddress {
 							user := &User{Address: addr}
 							db.FirstOrCreate(user, user)
 							if user.TelegramId == 0 {
