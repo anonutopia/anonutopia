@@ -8,7 +8,7 @@ import (
 type Anon struct {
 	Applicants string
 	Citizens   string
-	Founders   string
+	Funders    string
 	Budget     string
 }
 
@@ -19,8 +19,8 @@ func (a *Anon) loadData() {
 	citizen := &Badge{Name: "citizen"}
 	db.Preload("Users").First(citizen, citizen)
 
-	founder := &Badge{Name: "founder"}
-	db.Preload("Users").First(founder, founder)
+	funder := &Badge{Name: "funder"}
+	db.Preload("Users").First(funder, funder)
 
 	prices, err := pc.DoRequest()
 	if err == nil {
@@ -37,7 +37,7 @@ func (a *Anon) loadData() {
 
 	a.Applicants = fmt.Sprintf("%d", len(applicant.Users))
 	a.Citizens = fmt.Sprintf("%d", len(citizen.Users))
-	a.Founders = fmt.Sprintf("%d", len(founder.Users))
+	a.Funders = fmt.Sprintf("%d", len(funder.Users))
 }
 
 func initAnon() *Anon {
