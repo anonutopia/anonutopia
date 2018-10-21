@@ -53,9 +53,9 @@ var ttlSupply = -1;
 
 	///////////////////////////
 	// Mobile dropdown
-	$('.has-dropdown a').on('click', function() {
-		$(this).parent().toggleClass('open-drop');
-	});
+	// $('.has-dropdown a').on('click', function() {
+	// 	$(this).parent().toggleClass('open-drop');
+	// });
 
 	///////////////////////////
 	// On Scroll
