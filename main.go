@@ -22,6 +22,12 @@ var wnc *gowaves.WavesNodeClient
 
 var db *gorm.DB
 
+var anon *Anon
+
+var anote *Anote
+
+var pc *PriceClient
+
 func main() {
 	conf = initConfig()
 
@@ -32,6 +38,12 @@ func main() {
 	wnc = initWaves()
 
 	db = initDb()
+
+	anon = initAnon()
+
+	anote = initAnote()
+
+	pc = initPriceClient()
 
 	m.Get("/", newPageData, homeView)
 	m.Get("/crowdfunding/", newPageData, crowdfundingView)

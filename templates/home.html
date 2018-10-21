@@ -157,30 +157,40 @@
 			<div class="row">
 
 				<!-- number -->
-				<div class="col-sm-4 col-xs-6">
-					<div class="number">
-						<i class="fa fa-user"></i>
-						<h3 class="white-text"><span class="counter">20</span></h3>
-						<span class="white-text">Citizens</span>
-					</div>
-				</div>
-				<!-- /number -->
-
-				<!-- number -->
-				<div class="col-sm-4 col-xs-6">
+				<div class="col-sm-3 col-xs-6">
 					<div class="number">
 						<i class="fa fa-user-plus"></i>
-						<h3 class="white-text"><span class="counter">72</span></h3>
+						<h3 class="white-text"><span class="counter">{{ .Anon.Applicants }}</span></h3>
 						<span class="white-text">Applicants</span>
 					</div>
 				</div>
 				<!-- /number -->
 
 				<!-- number -->
-				<div class="col-sm-4 col-xs-12">
+				<div class="col-sm-3 col-xs-6">
+					<div class="number">
+						<i class="fa fa-user"></i>
+						<h3 class="white-text"><span class="counter">{{ .Anon.Citizens }}</span></h3>
+						<span class="white-text">Citizens</span>
+					</div>
+				</div>
+				<!-- /number -->
+
+				<!-- number -->
+				<div class="col-sm-3 col-xs-6">
+					<div class="number">
+						<i class="fa fa-user-secret"></i>
+						<h3 class="white-text"><span class="counter">{{ .Anon.Founders }}</span></h3>
+						<span class="white-text">Founders</span>
+					</div>
+				</div>
+				<!-- /number -->
+
+				<!-- number -->
+				<div class="col-sm-3 col-xs-12">
 					<div class="number">
 						<i class="fa fa-euro"></i>
-						<h3 class="white-text"><span class="counter">1,230</span></h3>
+						<h3 class="white-text"><span class="counter">{{ .Anon.Budget }}</span></h3>
 						<span class="white-text">Budget</span>
 					</div>
 				</div>
