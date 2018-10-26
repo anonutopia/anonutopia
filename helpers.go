@@ -8,6 +8,7 @@ import (
 )
 
 func newPageData(ctx *macaron.Context) {
+	anote.loadState()
 	uri := strings.Split(ctx.Req.RequestURI, "?")
 	ctx.Data["URI"] = uri[0]
 	ctx.Data["NodeAddress"] = conf.NodeAddress

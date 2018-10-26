@@ -23,6 +23,7 @@ func (a *Anon) loadData() {
 	db.Preload("Users").First(funder, funder)
 
 	prices, err := pc.DoRequest()
+	anote.loadState()
 	if err == nil {
 		amount := uint64(0)
 
