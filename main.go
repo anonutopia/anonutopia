@@ -39,9 +39,9 @@ func main() {
 
 	db = initDb()
 
-	anon = initAnon()
-
 	anote = initAnote()
+
+	anon = initAnon()
 
 	pc = initPriceClient()
 
