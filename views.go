@@ -160,6 +160,8 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 										wnc.AssetsTransfer(atr)
 									}
 								}
+							} else {
+								msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "alreadyActivated"))
 							}
 						} else {
 							msg = tgbotapi.NewMessage(int64(tu.Message.Chat.ID), ui18n.Tr(lang, "yourAddress"))
