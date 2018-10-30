@@ -66,7 +66,7 @@ func stakingView(ctx *macaron.Context) {
 }
 
 func airdropView(ctx *macaron.Context) {
-	ctx.Data["Title"] = "Claim 1 Free ANOTE | "
+	ctx.Data["Title"] = "Claim 1 Free Anote | "
 
 	ctx.HTML(200, "airdrop")
 }
@@ -78,7 +78,7 @@ func profitView(ctx *macaron.Context) {
 }
 
 func anoteView(ctx *macaron.Context) {
-	ctx.Data["Title"] = "What is ANOTE? | "
+	ctx.Data["Title"] = "What is Anote? | "
 
 	ctx.HTML(200, "anote")
 }
