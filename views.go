@@ -111,6 +111,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 
 	log.Println(tu)
 	log.Println(tu.Message.Chat.ID)
+	log.Println(tu.Message.Chat.Type)
 
 	if len(msgArr) == 1 {
 		if msgArr[0] == "/gimme@AnonsRobot" {
