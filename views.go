@@ -109,6 +109,7 @@ func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 		lang = "en-US"
 	}
 
+	log.Println(tu)
 	log.Println(tu.Message.Chat.ID)
 
 	if len(msgArr) == 1 {
