@@ -59,6 +59,7 @@ func main() {
 	m.Get("/anote/", newPageData, anoteView)
 	m.Get("/projects/", newPageData, projectsView)
 	m.Get("/contact/", newPageData, contactView)
+	m.Get("/pressrelease/", newPageData, prView)
 
 	m.Post("/webhook/", newPageData, binding.Json(TelegramUpdate{}), webhookView)
 

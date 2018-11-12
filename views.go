@@ -95,6 +95,12 @@ func contactView(ctx *macaron.Context) {
 	ctx.HTML(200, "contact")
 }
 
+func prView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Anonutopia, a Smart Contract Country, Announces the First Payout of Universal Basic Income to Its Citizens | "
+
+	ctx.HTML(200, "pressrelease")
+}
+
 func webhookView(ctx *macaron.Context, tu TelegramUpdate) {
 	msgArr := strings.Fields(tu.Message.Text)
 	var msg tgbotapi.Chattable
