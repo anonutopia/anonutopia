@@ -88,7 +88,11 @@
                             <div class="well">
                                 <h3 class="text-center">Current Anote Price</h3>
                                 <p class="text-center" style="margin-bottom: 0;"><strong>{{ .PriceEur }} EUR</strong></p>
-                            </div>
+                            </div><br>
+
+                            <h3>Anote Price</h3>
+
+                            <div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
 
                         </div>
                     </div>
@@ -135,3 +139,72 @@
         <!-- /Container -->
 
     </div>
+
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+
+<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"startDuration": 1,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"bullet": "round",
+							"id": "AmGraph-1",
+							"title": "Anote Price in EUR",
+							"valueField": "column-1"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "Price (EUR)"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"enabled": true,
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Anote Price Chart"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "October 23",
+							"column-1": "0.01"
+						},
+						{
+							"category": "October 30",
+							"column-1": "0.0268"
+						},
+						{
+							"category": "November 6",
+							"column-1": "0.0289"
+						},
+						{
+							"category": "November 13",
+							"column-1": "0.045"
+						},
+						{
+							"category": "November 20",
+							"column-1": "0.0499"
+						}
+					]
+				}
+			);
+		</script>
