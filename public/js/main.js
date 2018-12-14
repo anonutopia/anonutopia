@@ -116,11 +116,11 @@ var ttlSupply = -1;
 		}
 	});
 
-    var referral = getReferralFromUrl();
+    // var referral = getReferralFromUrl();
 
-    if (referral) {
-        Cookies.set('referral', referral, { expires: 30, domain: getDomainName(window.location.hostname) });
-    }
+    // if (referral) {
+    //     Cookies.set('referral', referral, { expires: 30, domain: getDomainName(window.location.hostname) });
+    // }
     
     //  else {
     //     ref = Cookies.get('ref');

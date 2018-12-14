@@ -8,8 +8,8 @@ import (
 	"github.com/anonutopia/gowaves"
 	"github.com/go-macaron/binding"
 	"github.com/jinzhu/gorm"
-	"gopkg.in/macaron.v1"
-	"gopkg.in/telegram-bot-api.v4"
+	macaron "gopkg.in/macaron.v1"
+	tgbotapi "gopkg.in/telegram-bot-api.v4"
 )
 
 var m *macaron.Macaron
@@ -50,6 +50,7 @@ func main() {
 	m.Get("/about/", newPageData, aboutView)
 	m.Get("/faq/", newPageData, faqView)
 	m.Get("/apply/", newPageData, applyView)
+	m.Get("/apply-advanced/", newPageData, applyAdvancedView)
 	m.Get("/cryptocountries/", newPageData, cryptocountriesView)
 	m.Get("/tags/", newPageData, tagsView)
 	m.Get("/docs/", newPageData, docsView)

@@ -7,8 +7,8 @@ import (
 
 	ui18n "github.com/Unknwon/i18n"
 	"github.com/anonutopia/gowaves"
-	"gopkg.in/macaron.v1"
-	"gopkg.in/telegram-bot-api.v4"
+	macaron "gopkg.in/macaron.v1"
+	tgbotapi "gopkg.in/telegram-bot-api.v4"
 )
 
 func homeView(ctx *macaron.Context) {
@@ -39,6 +39,12 @@ func applyView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Apply for Citizenship | "
 
 	ctx.HTML(200, "apply")
+}
+
+func applyAdvancedView(ctx *macaron.Context) {
+	ctx.Data["Title"] = "Advanced Citizenship Application | "
+
+	ctx.HTML(200, "apply-advanced")
 }
 
 func cryptocountriesView(ctx *macaron.Context) {

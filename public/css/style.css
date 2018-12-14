@@ -219,11 +219,11 @@ input[type="text"], input[type="email"], input[type="password"], input[type="num
     /* height: 40px; */
     width: 100%;
     border: none;
-    background: #D4D4D4;
+    background: #FFF;
     border-bottom: 2px solid #EEE;
     color: #354052;
     padding: 15px 10px;
-    opacity: 0.5;
+    opacity: 0.9;
     -webkit-transition: 0.2s border-color, 0.2s opacity;
     transition: 0.2s border-color, 0.2s opacity;
 }

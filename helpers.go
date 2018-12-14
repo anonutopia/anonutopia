@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"gopkg.in/macaron.v1"
+	macaron "gopkg.in/macaron.v1"
 )
 
 func newPageData(ctx *macaron.Context) {
@@ -14,4 +14,11 @@ func newPageData(ctx *macaron.Context) {
 	ctx.Data["NodeAddress"] = conf.NodeAddress
 	ctx.Data["Anon"] = anon
 	ctx.Data["PriceEur"] = fmt.Sprintf("%.8f", float64(anote.Price)/float64(satInBtc))
+
+	referral := ctx.Query("r")
+
+	if len(referral) > 0 {
+		ctx.SetCookie("referral", referral)
+		ctx.Redirect("./")
+	}
 }
