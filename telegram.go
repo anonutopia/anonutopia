@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"gopkg.in/telegram-bot-api.v4"
+	tgbotapi "gopkg.in/telegram-bot-api.v4"
 )
 
 func initBot() *tgbotapi.BotAPI {
@@ -20,6 +20,11 @@ func initBot() *tgbotapi.BotAPI {
 	bot.Send(msg)
 
 	return bot
+}
+
+func logTelegram(message string) {
+	msg := tgbotapi.NewMessage(-1001325718529, message)
+	bot.Send(msg)
 }
 
 type TelegramUpdate struct {

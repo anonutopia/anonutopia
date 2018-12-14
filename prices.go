@@ -43,6 +43,7 @@ func (w *PriceClient) DoRequest() (*Prices, error) {
 		}
 		if res.StatusCode != 200 {
 			log.Printf("[PriceClient.DoRequest] Error, body: %s", string(body))
+			logTelegram("[PriceClient.DoRequest] Error, body: %s", string(body))
 		}
 		json.Unmarshal(body, p)
 	} else {
