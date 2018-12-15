@@ -63,6 +63,7 @@ func main() {
 	m.Get("/pressrelease/", newPageData, prView)
 
 	m.Post("/webhook/", newPageData, binding.Json(TelegramUpdate{}), webhookView)
+	m.Post("/apply/", newPageData, binding.Bind(SignupForm{}), applyPostView)
 
 	m.NotFound(view404)
 

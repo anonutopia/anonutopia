@@ -138,18 +138,22 @@ var ttlSupply = -1;
 		"RS": true,
 	};
 
-	var map = new Datamap({
-        element: document.getElementById('container'),
-		fills: {
-			ORACLE: '#c40b0b',
-            defaultFill: '#adadad' // Any hex, color name or rgb/rgba value
-        },
-		data: {
-            HRV: { fillKey: 'ORACLE' },
-            SRB: { fillKey: 'ORACLE' }
-        },
-		responsive: true
-    });
+	try {
+		var map = new Datamap({
+			element: document.getElementById('container'),
+			fills: {
+				ORACLE: '#c40b0b',
+				defaultFill: '#adadad' // Any hex, color name or rgb/rgba value
+			},
+			data: {
+				HRV: { fillKey: 'ORACLE' },
+				SRB: { fillKey: 'ORACLE' }
+			},
+			responsive: true
+		});
+	} catch (e) {}
+
+	createWallet();
 
 })(jQuery);
 
@@ -164,4 +168,11 @@ function getReferralFromUrl(){
 
 function getDomainName(hostName) {
     return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
+}
+
+function createWallet() {
+	var Waves = WavesAPI.create(WavesAPI.MAINNET_CONFIG);
+	var seed = Waves.Seed.create();
+	$('#seed').val(seed.phrase);
+	$('#address').val(seed.address);
 }

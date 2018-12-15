@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"reflect"
 	"strings"
 
 	ui18n "github.com/Unknwon/i18n"
@@ -37,6 +38,30 @@ func faqView(ctx *macaron.Context) {
 
 func applyView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Apply for Citizenship | "
+
+	ctx.HTML(200, "apply")
+}
+
+func applyPostView(ctx *macaron.Context, suf SignupForm) {
+	ctx.Data["Title"] = "Apply for Citizenship | "
+
+	s := reflect.ValueOf(ctx.Data["Errors"])
+
+	if s.Len() == 0 {
+		u := &User{Email: suf.Email}
+		db.First(u, u)
+		if u.ID != 0 {
+			ctx.Data["Errors"] = true
+			ctx.Data["ErrorMsg"] = "This user already exists."
+		} else if !validateEmailDomain(suf.Email) {
+			ctx.Data["Errors"] = true
+			ctx.Data["ErrorMsg"] = "Please use one of known email providers like Gmail."
+		}
+	} else {
+		ctx.Data["ErrorMsg"] = "Email address is required."
+	}
+
+	ctx.Data["Form"] = suf
 
 	ctx.HTML(200, "apply")
 }
