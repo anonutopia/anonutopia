@@ -65,6 +65,18 @@ func applyPostView(ctx *macaron.Context, suf SignupForm) {
 			if err != nil {
 				log.Printf("Error in send welcome email: %s", err)
 				logTelegram(fmt.Sprintf("Error in send welcome email: %s", err))
+			} else {
+				uid, err := encrypt([]byte(conf.DbPass[:16]), u.Address)
+				if err == nil {
+					initLink := fmt.Sprintf(ui18n.Tr("en-US", "initializationLink"), uid)
+					ctx.Redirect(initLink)
+					return
+				} else {
+					log.Printf("Error redirect encrypt: %s", err)
+					logTelegram(fmt.Sprintf("Error redirect encrypt: %s", err))
+					ctx.Data["Errors"] = true
+					ctx.Data["ErrorMsg"] = "Something went wrong, please try again."
+				}
 			}
 		}
 	} else {
