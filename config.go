@@ -11,6 +11,7 @@ type Config struct {
 	Port            uint   `json:"port"`
 	Telegram        string `json:"telegram"`
 	WavesNodeApiKey string `json:"wavesnode_apikey"`
+	SendgridKey     string `json:"sendgrid_key"`
 	Debug           bool   `json:"debug"`
 	NodeAddress     string `json:"node_address"`
 	DbName          string `json:"db_name"`

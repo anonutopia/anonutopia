@@ -60,6 +60,12 @@ func applyPostView(ctx *macaron.Context, suf SignupForm) {
 			u.Address = u.Email
 			u.Nickname = u.Email
 			db.Create(u)
+
+			err := sendWelcomeEmail(u, "en-US")
+			if err != nil {
+				log.Printf("Error in send welcome email: %s", err)
+				logTelegram(fmt.Sprintf("Error in send welcome email: %s", err))
+			}
 		}
 	} else {
 		ctx.Data["ErrorMsg"] = "Email address is required."
