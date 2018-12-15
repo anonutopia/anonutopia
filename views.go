@@ -56,6 +56,10 @@ func applyPostView(ctx *macaron.Context, suf SignupForm) {
 		} else if !validateEmailDomain(suf.Email) {
 			ctx.Data["Errors"] = true
 			ctx.Data["ErrorMsg"] = "Please use one of known email providers like Gmail."
+		} else {
+			u.Address = u.Email
+			u.Nickname = u.Email
+			db.Create(u)
 		}
 	} else {
 		ctx.Data["ErrorMsg"] = "Email address is required."

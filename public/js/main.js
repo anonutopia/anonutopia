@@ -153,7 +153,7 @@ var ttlSupply = -1;
 		});
 	} catch (e) {}
 
-	createWallet();
+	// createWallet();
 
 })(jQuery);
 
@@ -170,9 +170,13 @@ function getDomainName(hostName) {
     return hostName.substring(hostName.lastIndexOf(".", hostName.lastIndexOf(".") - 1) + 1);
 }
 
-function createWallet() {
-	var Waves = WavesAPI.create(WavesAPI.MAINNET_CONFIG);
-	var seed = Waves.Seed.create();
-	$('#seed').val(seed.phrase);
-	$('#address').val(seed.address);
-}
+// function createWallet() {
+// 	var Waves = WavesAPI.create(WavesAPI.MAINNET_CONFIG);
+// 	var seed = Waves.Seed.create();
+// 	$('#seed').val(seed.phrase);
+// 	$('#address').val(seed.address);
+// }
+
+// window.localStorage.setItem('seed', seed.phrase);
+//             window.localStorage.setItem('encrypted', seed.encrypt(p1));
+//             Cookies.set('address', seed.address, { expires: 365 });

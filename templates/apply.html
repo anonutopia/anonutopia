@@ -31,8 +31,6 @@
                             <div class="form-group" id="amountGroup">
                                 <label for="email">Email Address</label>
                                 <input type="email" class="input" id="email" placeholder="anon@anonutopia.com" name="email" value="{{ .Form.Email }}">
-                                <input type="hidden" name="seed" id="seed" value="{{ .Form.Seed }}">
-                                <input type="hidden" name="address" id="address" value="{{ .Form.Address }}">
 {{ if .Errors }}
                                 <p class="bg-danger text-danger" style="margin: 10px 0; padding: 15px;">{{ .ErrorMsg }}</p>
 {{ end }}
