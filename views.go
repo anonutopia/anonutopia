@@ -21,6 +21,8 @@ func homeView(ctx *macaron.Context) {
 func crowdfundingView(ctx *macaron.Context) {
 	ctx.Data["Title"] = "Anonutopia Crowdfunding | "
 
+	ctx.Data["CitizenLimit"] = (10 * satInBtc / anote.Price)
+
 	ctx.HTML(200, "crowdfunding")
 }
 
