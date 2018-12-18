@@ -43,6 +43,7 @@ type User struct {
 	ReferralProfitBtcTotal  uint64
 	ReceivedFreeAnote       bool     `sql:"DEFAULT:false"`
 	EmailVerified           bool     `sql:"DEFAULT:false"`
+	SentFollowUp            bool     `sql:"DEFAULT:false"`
 	TelegramId              int      `sql:"DEFAULT:0"`
 	Badges                  []*Badge `gorm:"many2many:user_badges;"`
 }

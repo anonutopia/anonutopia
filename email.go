@@ -113,6 +113,35 @@ func sendWelcomeEmail(to *User, lang string) error {
 	return err
 }
 
+func sendFollowUpEmail(to *User, lang string) error {
+	em := &EmailMessage{}
+	em.Subject = "Grab Your Free Anotes"
+	em.FromName = "Anonutopia"
+	em.FromEmail = "no-reply@anonutopia.com"
+	em.BodyText = "Grab Your Free Anotes!"
+	em.BodyHTML = "Grab Your Free Anotes!"
+	em.ToEmail = to.Email
+	em.ToName = to.Nickname
+
+	t := template.New("followup.html")
+	var err error
+	t, err = t.ParseFiles("emails/followup.html")
+	if err != nil {
+		return err
+	}
+
+	var tpl bytes.Buffer
+	if err := t.Execute(&tpl, nil); err != nil {
+		return err
+	}
+
+	em.BodyHTML = tpl.String()
+
+	err = sendEmail(em)
+
+	return err
+}
+
 func validateEmailDomain(email string) bool {
 	for i := range domains {
 		if strings.HasSuffix(email, domains[i]) {

@@ -41,12 +41,25 @@ func (a *Anon) loadData() {
 	a.Founders = fmt.Sprintf("%d", len(founder.Users))
 }
 
+func (a *Anon) sendEmails() {
+	var users []*User
+	db.Find(&users)
+	for _, u := range users {
+		if u.EmailVerified && u.CreatedAt.Add(time.Hour*24).Before(time.Now()) && u.HasBadges() && !u.SentFollowUp {
+			sendFollowUpEmail(u, "en-US")
+			u.SentFollowUp = true
+			db.Save(u)
+		}
+	}
+}
+
 func initAnon() *Anon {
 	anon := &Anon{}
 
 	go func() {
 		for {
 			anon.loadData()
+			anon.sendEmails()
 			time.Sleep(5 * time.Minute)
 		}
 	}()
