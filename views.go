@@ -63,23 +63,23 @@ func applyPostView(ctx *macaron.Context, suf SignupForm) {
 			u.Nickname = u.Email
 			db.Create(u)
 
-			err := sendWelcomeEmail(u, "en-US")
-			if err != nil {
-				log.Printf("Error in send welcome email: %s", err)
-				logTelegram(fmt.Sprintf("Error in send welcome email: %s", err))
+			// err := sendWelcomeEmail(u, "en-US")
+			// if err != nil {
+			// 	log.Printf("Error in send welcome email: %s", err)
+			// 	logTelegram(fmt.Sprintf("Error in send welcome email: %s", err))
+			// } else {
+			uid, err := encrypt([]byte(conf.DbPass[:16]), u.Address)
+			if err == nil {
+				initLink := fmt.Sprintf(ui18n.Tr("en-US", "initializationLink"), uid)
+				ctx.Redirect(initLink)
+				return
 			} else {
-				uid, err := encrypt([]byte(conf.DbPass[:16]), u.Address)
-				if err == nil {
-					initLink := fmt.Sprintf(ui18n.Tr("en-US", "initializationLink"), uid)
-					ctx.Redirect(initLink)
-					return
-				} else {
-					log.Printf("Error redirect encrypt: %s", err)
-					logTelegram(fmt.Sprintf("Error redirect encrypt: %s", err))
-					ctx.Data["Errors"] = true
-					ctx.Data["ErrorMsg"] = "Something went wrong, please try again."
-				}
+				log.Printf("Error redirect encrypt: %s", err)
+				logTelegram(fmt.Sprintf("Error redirect encrypt: %s", err))
+				ctx.Data["Errors"] = true
+				ctx.Data["ErrorMsg"] = "Something went wrong, please try again."
 			}
+			// }
 		}
 	} else {
 		ctx.Data["ErrorMsg"] = "Email address is required."

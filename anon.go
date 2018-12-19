@@ -59,7 +59,7 @@ func initAnon() *Anon {
 	go func() {
 		for {
 			anon.loadData()
-			anon.sendEmails()
+			// anon.sendEmails()
 			time.Sleep(5 * time.Minute)
 		}
 	}()
