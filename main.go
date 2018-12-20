@@ -49,6 +49,7 @@ func main() {
 	m.Get("/crowdfunding/", newPageData, crowdfundingView)
 	m.Get("/about/", newPageData, aboutView)
 	m.Get("/faq/", newPageData, faqView)
+	m.Get("/apply/", newPageData, applyView)
 	m.Get("/apply-advanced/", newPageData, applyAdvancedView)
 	m.Get("/cryptocountries/", newPageData, cryptocountriesView)
 	m.Get("/tags/", newPageData, tagsView)

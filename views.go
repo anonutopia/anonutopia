@@ -39,9 +39,7 @@ func faqView(ctx *macaron.Context) {
 }
 
 func applyView(ctx *macaron.Context) {
-	ctx.Data["Title"] = "Apply for Citizenship | "
-
-	ctx.HTML(200, "apply")
+	ctx.Redirect("https://wallet.anonutopia.com/sign-up/")
 }
 
 func applyPostView(ctx *macaron.Context, suf SignupForm) {
