@@ -49,7 +49,6 @@ func main() {
 	m.Get("/crowdfunding/", newPageData, crowdfundingView)
 	m.Get("/about/", newPageData, aboutView)
 	m.Get("/faq/", newPageData, faqView)
-	m.Get("/apply/", newPageData, applyView)
 	m.Get("/apply-advanced/", newPageData, applyAdvancedView)
 	m.Get("/cryptocountries/", newPageData, cryptocountriesView)
 	m.Get("/tags/", newPageData, tagsView)
@@ -63,7 +62,6 @@ func main() {
 	m.Get("/pressrelease/", newPageData, prView)
 
 	m.Post("/webhook/", newPageData, binding.Json(TelegramUpdate{}), webhookView)
-	m.Post("/apply/", newPageData, binding.Bind(SignupForm{}), applyPostView)
 
 	m.NotFound(view404)
 
