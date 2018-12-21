@@ -142,6 +142,48 @@ func sendFollowUpEmail(to *User, lang string) error {
 	return err
 }
 
+func sendPasswordResetEmail(to *User, lang string) error {
+	em := &EmailMessage{}
+	em.Subject = "Anonutopia Password Reset"
+	em.FromName = "Anonutopia"
+	em.FromEmail = "no-reply@anonutopia.com"
+	em.BodyText = "Anonutopia Password Reset"
+	em.BodyHTML = "Anonutopia Password Reset"
+	em.ToEmail = to.Email
+	em.ToName = to.Nickname
+
+	t := template.New("passwordreset.html")
+	var err error
+	t, err = t.ParseFiles("emails/passwordreset.html")
+	if err != nil {
+		return err
+	}
+
+	uid, err := encrypt([]byte(conf.DbPass[:16]), to.Address)
+	if err != nil {
+		return err
+	}
+
+	verLink := fmt.Sprintf(ui18n.Tr(lang, "verificationLink"), uid)
+
+	data := struct {
+		VerificationLink string
+	}{
+		VerificationLink: verLink,
+	}
+
+	var tpl bytes.Buffer
+	if err := t.Execute(&tpl, data); err != nil {
+		return err
+	}
+
+	em.BodyHTML = tpl.String()
+
+	err = sendEmail(em)
+
+	return err
+}
+
 func validateEmailDomain(email string) bool {
 	for i := range domains {
 		if strings.HasSuffix(email, domains[i]) {

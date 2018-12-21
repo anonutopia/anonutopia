@@ -12,6 +12,7 @@ cp -R build/anonutopia/templates/ anonutopianew/ &&
 cp -R build/anonutopia/public/ anonutopianew/ &&
 cp -R build/anonutopia/conf/ anonutopianew/ &&
 cp -R build/anonutopia/anonutopia anonutopianew/ && 
+sudo supervisorctl stop anonutopia &&
 rm -rf anonutopia && 
 mv anonutopianew anonutopia && 
-sudo supervisorctl reload'
+sudo supervisorctl start anonutopia'
