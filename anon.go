@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
@@ -46,7 +47,12 @@ func (a *Anon) sendEmails() {
 	db.Find(&users)
 	for _, u := range users {
 		if u.EmailVerified && u.CreatedAt.Add(time.Hour*24).Before(time.Now()) && u.HasBadges() && !u.SentFollowUp {
-			sendFollowUpEmail(u, "en-US")
+			err := sendFollowUpEmail(u, "en-US")
+			if err != nil {
+				logTelegram(fmt.Sprintf("Error sending follow up email: %s", err))
+			} else {
+				log.Printf("Follow up email sent: %s", u.Email)
+			}
 			u.SentFollowUp = true
 			db.Save(u)
 		}
@@ -59,7 +65,7 @@ func initAnon() *Anon {
 	go func() {
 		for {
 			anon.loadData()
-			// anon.sendEmails()
+			anon.sendEmails()
 			time.Sleep(5 * time.Minute)
 		}
 	}()
