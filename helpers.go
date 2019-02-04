@@ -24,7 +24,7 @@ func newPageData(ctx *macaron.Context) {
 	referral := ctx.Query("r")
 
 	if len(referral) > 0 {
-		ctx.SetCookie("referral", referral, -1, "/", ".anonutopia.com")
+		ctx.SetCookie("referral", referral, 100, "/", ".anonutopia.com")
 		ctx.Redirect("./")
 	}
 }
