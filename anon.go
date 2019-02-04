@@ -50,6 +50,7 @@ func (a *Anon) sendEmails() {
 			err := sendFollowUpEmail(u, "en-US")
 			if err != nil {
 				logTelegram(fmt.Sprintf("Error sending follow up email: %s", err))
+				return
 			} else {
 				log.Printf("Follow up email sent: %s", u.Email)
 			}
